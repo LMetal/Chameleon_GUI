@@ -1,9 +1,13 @@
 Used commands
 
 List available flavors	openstack flavor list --max-width 500
+
 List images	openstack image list --max-width 500
+
 List keypairs	openstack keypair list --max-width 500
+
 List security groups	openstack security group list -c ID -c Name --max-width 500
+
 List networks	openstack network list -c ID -c Name --max-width 500
 
 Create a floating IP	openstack floating ip create --description <description> public
