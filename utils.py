@@ -3,7 +3,7 @@ import os
 import threading
 import shutil
 
-from OpenstackShell import OpenStackShell
+from shell import OpenStackShell
 
 class OpenStackManager:
     def __init__(self, sh_filename):

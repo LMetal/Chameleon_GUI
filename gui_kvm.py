@@ -25,7 +25,7 @@ def init_dati_kvm(root, progressbar, loading_label, loaded_label, load_error_lab
         root.after(0, progressbar.start)
         root.after(0, lambda: loading_label.grid())
 
-        # Esecuzione parallela
+        #creazione thread
         with ThreadPoolExecutor() as executor:
             futures = {
                 'server': executor.submit(utils.get_server),
