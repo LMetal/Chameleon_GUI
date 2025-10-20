@@ -151,7 +151,7 @@ def create_chi_tab(notebook, password):
 
     var_ip = tk.IntVar()
     check_ip = tk.Checkbutton(top_frame, text='Associa nuovo floating IP', variable=var_ip, onvalue=1, offvalue=0)
-    check_ip.grid(row=8, column=0, columnspan=2, pady=5)
+    check_ip.grid(row=7, column=0, columnspan=2, pady=5)
 
     status_label = tk.Label(top_frame, text="", fg="blue")
     status_label.grid(row=9, column=0, columnspan=2)
@@ -287,7 +287,7 @@ def create_chi_tab(notebook, password):
         )).start()
 
     b = tk.Button(top_frame, text="Lancia Macchina Baremetal", command=start)
-    b.grid(row=7, column=0, columnspan=2, pady=15)
+    b.grid(row=8, column=0, columnspan=2, pady=15)
 
     btn_aggiorna_server = ttk.Button(bottom_frame, text="Ricarica", command=aggiorna_server_thread)
     btn_aggiorna_server.grid(row=0, column=2)
