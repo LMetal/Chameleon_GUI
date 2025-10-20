@@ -102,32 +102,32 @@ def create_chi_tab(notebook, password):
     tab = ttk.Frame(notebook)
     notebook.add(tab, text="CHI@TACC")
 
-    top_frame = tk.LabelFrame(tab, text="Avvia macchina baremetal", padx=10, pady=10, font=("Arial", 10, "bold"))
+    top_frame = tk.LabelFrame(tab, text="Launch baremetal machine", padx=10, pady=10, font=("Arial", 10, "bold"))
     top_frame.pack(side='top', fill='both', expand=True, padx=10, pady=10)
 
-    bottom_frame = tk.LabelFrame(tab, text="Elimina macchina baremetal", padx=10, pady=10, font=("Arial", 10, "bold"))
+    bottom_frame = tk.LabelFrame(tab, text="Delete baremetal machine", padx=10, pady=10, font=("Arial", 10, "bold"))
     bottom_frame.pack(side='bottom', fill='both', expand=True, padx=10, pady=10)
 
-    tk.Label(top_frame, text="Nome Istanza:").grid(row=0, column=0, sticky='w', padx=5, pady=5)
+    tk.Label(top_frame, text="Instance Name:").grid(row=0, column=0, sticky='w', padx=5, pady=5)
     name = tk.Entry(top_frame)
     name.grid(row=0, column=1, sticky='w', padx=5, pady=5)
 
-    tk.Label(top_frame, text="Seleziona Node Type:").grid(row=1, column=0)
+    tk.Label(top_frame, text="Node Type:").grid(row=1, column=0)
     combo_node = ttk.Combobox(top_frame, state='readonly')
     combo_node.grid(row=1, column=1)
-    tk.Label(top_frame, text="Seleziona Immagine:").grid(row=2, column=0)
+    tk.Label(top_frame, text="Image:").grid(row=2, column=0)
     combo_image = ttk.Combobox(top_frame, state='readonly')
     combo_image.grid(row=2, column=1)
 
-    tk.Label(top_frame, text="Seleziona Coppia di Chiavi:").grid(row=3, column=0)
+    tk.Label(top_frame, text="Keypair:").grid(row=3, column=0)
     combo_key = ttk.Combobox(top_frame, state='readonly')
     combo_key.grid(row=3, column=1)
 
-    tk.Label(top_frame, text="Seleziona Gruppo di Sicurezza:").grid(row=4, column=0)
+    tk.Label(top_frame, text="Security Group:").grid(row=4, column=0)
     combo_sec = ttk.Combobox(top_frame, state='readonly')
     combo_sec.grid(row=4, column=1)
 
-    tk.Label(top_frame, text="Seleziona Network:").grid(row=5, column=0)
+    tk.Label(top_frame, text="Network:").grid(row=5, column=0)
     combo_net = ttk.Combobox(top_frame, state='readonly')
     combo_net.grid(row=5, column=1)
 
@@ -137,7 +137,7 @@ def create_chi_tab(notebook, password):
     #listaore
     time_options = [f"{h:02d}:00" for h in range(24)]
 
-    tk.Label(top_frame, text="Seleziona Data e Ora Fine:").grid(row=6, column=0, padx=5, pady=5, sticky='w')
+    tk.Label(top_frame, text="End Date and Time:").grid(row=6, column=0, padx=5, pady=5, sticky='w')
 
     datetime_frame = tk.Frame(top_frame)
     datetime_frame.grid(row=6, column=1, columnspan=2, sticky='w')
@@ -150,21 +150,21 @@ def create_chi_tab(notebook, password):
     combo_time.set(time_options[current_hour])
 
     var_ip = tk.IntVar()
-    check_ip = tk.Checkbutton(top_frame, text='Associa nuovo floating IP', variable=var_ip, onvalue=1, offvalue=0)
+    check_ip = tk.Checkbutton(top_frame, text='Associate New Floating IP', variable=var_ip, onvalue=1, offvalue=0)
     check_ip.grid(row=7, column=0, columnspan=2, pady=5)
 
     status_label = tk.Label(top_frame, text="", fg="blue")
     status_label.grid(row=9, column=0, columnspan=2)
 
-    loading_label = tk.Label(top_frame, text="Caricamento dati in corso...", fg="blue")
+    loading_label = tk.Label(top_frame, text="Loading...", fg="blue")
     loading_label.grid(row=10, column=0, columnspan=2)
     loading_label.grid_remove()
 
-    loaded_label = tk.Label(top_frame, text="Dati caricati con successo", fg="green")
+    loaded_label = tk.Label(top_frame, text="Loading complete", fg="green")
     loaded_label.grid(row=10, column=0, columnspan=2)
     loaded_label.grid_remove()
 
-    load_error_label = tk.Label(top_frame, text="Errore caricamento dati", fg="red")
+    load_error_label = tk.Label(top_frame, text="An error occured while loading", fg="red")
     load_error_label.grid(row=10, column=0, columnspan=2)
     load_error_label.grid_remove()
 
@@ -172,23 +172,23 @@ def create_chi_tab(notebook, password):
     progressbar.grid(row=11, column=0, columnspan=2, pady=5)
     progressbar.grid_remove()
 
-    tk.Label(bottom_frame, text="Seleziona Server:").grid(row=0, column=0)
+    tk.Label(bottom_frame, text="Select Server:").grid(row=0, column=0)
     combo_server = ttk.Combobox(bottom_frame, state='readonly')
     combo_server.grid(row=0, column=1)
 
     var_ip2 = tk.IntVar()
-    check_ip2 = tk.Checkbutton(bottom_frame, text='Rilascia floating IP', variable=var_ip2, onvalue=1, offvalue=0)
+    check_ip2 = tk.Checkbutton(bottom_frame, text='Release Floating IP', variable=var_ip2, onvalue=1, offvalue=0)
     check_ip2.grid(row=1, column=0, columnspan=2, pady=5)
 
-    loading_label_server = tk.Label(bottom_frame, text="Caricamento dati in corso...", fg="blue")
+    loading_label_server = tk.Label(bottom_frame, text="Loading...", fg="blue")
     loading_label_server.grid(row=3, column=0, columnspan=2)
     loading_label_server.grid_remove()
 
-    loaded_label_server = tk.Label(bottom_frame, text="Dati caricati con successo", fg="green")
+    loaded_label_server = tk.Label(bottom_frame, text="Loading complete", fg="green")
     loaded_label_server.grid(row=3, column=0, columnspan=2)
     loaded_label_server.grid_remove()
 
-    load_error_label_server = tk.Label(bottom_frame, text="Errore caricamento dati", fg="red")
+    load_error_label_server = tk.Label(bottom_frame, text="An error occured while loading", fg="red")
     load_error_label_server.grid(row=3, column=0, columnspan=2)
     load_error_label_server.grid_remove()
 
@@ -210,7 +210,7 @@ def create_chi_tab(notebook, password):
 
     def start():
         if not combo_image.get() or not combo_key.get() or not combo_node.get() or not combo_sec.get() or not name.get():
-            messagebox.showerror("Errore", "Campi necessari non compilati")
+            messagebox.showerror("Error", "Required fields not filled in")
         else:
             node_type = combo_node.get()
             image_id = images_dict.get(combo_image.get())
@@ -221,24 +221,24 @@ def create_chi_tab(notebook, password):
             end_time = combo_time.get()
             machine_name = name.get()
             
-            status_label.config(text="Creazione lease in corso...")
+            status_label.config(text="Creating the lease...")
             res_id, lease_id = utils.new_reservation(node_type, machine_name, end_date, end_time)
 
             if res_id == None or lease_id == None:
-                messagebox.showerror("Errore", f"Risorse non sufficienti per la prenotazione")
+                messagebox.showerror("Error", f"Insufficient resurces")
 
             
             time.sleep(5)
             
-            status_label.config(text="Creazione macchina in corso...")
+            status_label.config(text="Creating baremetal instance...")
             error = utils.create_baremetal_machine(image_id, key, sec_group, network, res_id, lease_id, machine_name)
 
             if var_ip.get() == 1:
                 id_floating_ip, addr_floating_ip = utils.new_floating_ip(name.get())
                 utils.add_floating_ip(machine_name, id_floating_ip)
-                messagebox.showinfo("Macchina creata con successo", f"Accedi con:\nssh cc@{addr_floating_ip}")
+                messagebox.showinfo("Instance created", f"Access with:\nssh cc@{addr_floating_ip}")
 
-            status_label.config(text="Macchina creata con successo")
+            status_label.config(text="Instance created")
 
             combo_node.set('')
             combo_image.set('')
@@ -247,7 +247,7 @@ def create_chi_tab(notebook, password):
             combo_net.set('')
             name.delete(0, tk.END)
             var_ip.set(0)
-            status_label.config(text="Pronto per una nuova creazione.")
+            status_label.config(text="Ready for new operation.")
 
             threading.Thread(target=lambda: aggiorna_server(
                 tab.winfo_toplevel(), progressbar_server, loading_label_server,
@@ -265,9 +265,9 @@ def create_chi_tab(notebook, password):
                 print(server_dict.get(server_name))
                 if floating_delete == 1 and server_dict.get(server_name)[1] is not None:
                     utils.delete_floating_ip(server_dict.get(server_name)[1])
-                    messagebox.showinfo("Successo", "Server e floating IP eliminati con successo")
+                    messagebox.showinfo("Success", "Instance and floating IP deleted")
                 else:
-                    messagebox.showinfo("Successo", "Server eliminato con successo")
+                    messagebox.showinfo("Success", "Instance deleted")
 
                 combo_server.set('')
                 var_ip2.set(0)
@@ -276,9 +276,9 @@ def create_chi_tab(notebook, password):
                     loaded_label_server, load_error_label_server, aggiorna_combobox_server
                 )).start()
             except Exception as e:
-                messagebox.showerror("Errore", f"Errore nell'eliminazione: {e}")
+                messagebox.showerror("Error", f"Error while eliminating: {e}")
         else:
-            messagebox.showerror("Errore", "Seleziona un server")
+            messagebox.showerror("Error", "Select an instance")
 
     def aggiorna_server_thread():
         threading.Thread(target=lambda: aggiorna_server(
@@ -286,13 +286,13 @@ def create_chi_tab(notebook, password):
             loaded_label_server, load_error_label_server, aggiorna_combobox_server
         )).start()
 
-    b = tk.Button(top_frame, text="Lancia Macchina Baremetal", command=start)
+    b = tk.Button(top_frame, text="Launch baremetal instance", command=start)
     b.grid(row=8, column=0, columnspan=2, pady=15)
 
-    btn_aggiorna_server = ttk.Button(bottom_frame, text="Ricarica", command=aggiorna_server_thread)
+    btn_aggiorna_server = ttk.Button(bottom_frame, text="Reload", command=aggiorna_server_thread)
     btn_aggiorna_server.grid(row=0, column=2)
 
-    b2 = tk.Button(bottom_frame, text="Elimina Macchina Baremetal", command=delete)
+    b2 = tk.Button(bottom_frame, text="Delete baremetal instance", command=delete)
     b2.grid(row=2, column=0, columnspan=2, pady=15)
 
     threading.Thread(target=lambda: init_dati_chi(

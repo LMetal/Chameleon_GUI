@@ -15,7 +15,7 @@ def main():
     #    return
 
     root.deiconify()
-    root.title("Gestione Macchine Virtuali")
+    root.title("Chameleon Cloud GUI")
     
     root.geometry("500x600")
     root.minsize(500, 400)

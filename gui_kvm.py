@@ -108,54 +108,54 @@ def create_kvm_tab(notebook, password):
     notebook.add(tab, text="KVM@TACC")
 
     #top
-    top_frame = tk.LabelFrame(tab, text="Avvia macchina virtuale", padx=10, pady=10, font=("Arial", 10, "bold"))
+    top_frame = tk.LabelFrame(tab, text="Launch virtual machine", padx=10, pady=10, font=("Arial", 10, "bold"))
     top_frame.pack(side='top', fill='both', expand=True, padx=10, pady=10)
 
     #bottom
-    bottom_frame = tk.LabelFrame(tab, text="Elimina macchina virtuale", padx=10, pady=10, font=("Arial", 10, "bold"))
+    bottom_frame = tk.LabelFrame(tab, text="Delete virtual machine", padx=10, pady=10, font=("Arial", 10, "bold"))
     bottom_frame.pack(side='bottom', fill='both', expand=True, padx=10, pady=10)
 
     #top frame
-    tk.Label(top_frame, text="Nome Istanza:").grid(row=0, column=0, sticky='w', padx=5, pady=5)
+    tk.Label(top_frame, text="Instance Name:").grid(row=0, column=0, sticky='w', padx=5, pady=5)
     name = tk.Entry(top_frame)
     name.grid(row=0, column=1, sticky='w', padx=5, pady=5)
 
-    tk.Label(top_frame, text="Seleziona Flavor:").grid(row=1, column=0)
+    tk.Label(top_frame, text="Flavor:").grid(row=1, column=0)
     combo_flavor = ttk.Combobox(top_frame, state='readonly')
     combo_flavor.grid(row=1, column=1)
 
-    tk.Label(top_frame, text="Seleziona Immagine:").grid(row=2, column=0)
+    tk.Label(top_frame, text="Image:").grid(row=2, column=0)
     combo_image = ttk.Combobox(top_frame, state='readonly')
     combo_image.grid(row=2, column=1)
 
-    tk.Label(top_frame, text="Seleziona Coppia di Chiavi:").grid(row=3, column=0)
+    tk.Label(top_frame, text="Keypair:").grid(row=3, column=0)
     combo_key = ttk.Combobox(top_frame, state='readonly')
     combo_key.grid(row=3, column=1)
 
-    tk.Label(top_frame, text="Seleziona Gruppo di Sicurezza:").grid(row=4, column=0)
+    tk.Label(top_frame, text="Security Group:").grid(row=4, column=0)
     combo_sec = ttk.Combobox(top_frame, state='readonly')
     combo_sec.grid(row=4, column=1)
 
-    tk.Label(top_frame, text="Seleziona Network:").grid(row=5, column=0)
+    tk.Label(top_frame, text="Network:").grid(row=5, column=0)
     combo_net = ttk.Combobox(top_frame, state='readonly')
     combo_net.grid(row=5, column=1)
 
     var_ip = tk.IntVar()
-    check_ip = tk.Checkbutton(top_frame, text='Associa nuovo floating IP', variable=var_ip, onvalue=1, offvalue=0)
+    check_ip = tk.Checkbutton(top_frame, text='Associate New Floating IP', variable=var_ip, onvalue=1, offvalue=0)
     check_ip.grid(row=6, column=0, columnspan=2, pady=5)
 
     status_label = tk.Label(top_frame, text="", fg="blue")
     status_label.grid(row=8, column=0, columnspan=2)
 
-    loading_label = tk.Label(top_frame, text="Caricamento dati in corso...", fg="blue")
+    loading_label = tk.Label(top_frame, text="Loading...", fg="blue")
     loading_label.grid(row=9, column=0, columnspan=2)
     loading_label.grid_remove()
 
-    loaded_label = tk.Label(top_frame, text="Dati caricati con successo", fg="green")
+    loaded_label = tk.Label(top_frame, text="Loading complete", fg="green")
     loaded_label.grid(row=9, column=0, columnspan=2)
     loaded_label.grid_remove()
 
-    load_error_label = tk.Label(top_frame, text="Errore caricamento dati", fg="red")
+    load_error_label = tk.Label(top_frame, text="An error occured while loading", fg="red")
     load_error_label.grid(row=9, column=0, columnspan=2)
     load_error_label.grid_remove()
 
@@ -166,23 +166,23 @@ def create_kvm_tab(notebook, password):
 
 
     #bottom frame
-    tk.Label(bottom_frame, text="Seleziona Server:").grid(row=0, column=0)
+    tk.Label(bottom_frame, text="Select Server:").grid(row=0, column=0)
     combo_server = ttk.Combobox(bottom_frame, state='readonly')
     combo_server.grid(row=0, column=1)
 
     var_ip2 = tk.IntVar()
-    check_ip2 = tk.Checkbutton(bottom_frame, text='Rilascia floating IP', variable=var_ip2, onvalue=1, offvalue=0)
+    check_ip2 = tk.Checkbutton(bottom_frame, text='Release Floating IP', variable=var_ip2, onvalue=1, offvalue=0)
     check_ip2.grid(row=1, column=0, columnspan=2, pady=5)
 
-    loading_label_server = tk.Label(bottom_frame, text="Caricamento dati in corso...", fg="blue")
+    loading_label_server = tk.Label(bottom_frame, text="Loading...", fg="blue")
     loading_label_server.grid(row=3, column=0, columnspan=2)
     loading_label_server.grid_remove()
 
-    loaded_label_server = tk.Label(bottom_frame, text="Dati caricati con successo", fg="green")
+    loaded_label_server = tk.Label(bottom_frame, text="Loading complete", fg="green")
     loaded_label_server.grid(row=3, column=0, columnspan=2)
     loaded_label_server.grid_remove()
 
-    load_error_label_server = tk.Label(bottom_frame, text="Errore caricamento dati", fg="red")
+    load_error_label_server = tk.Label(bottom_frame, text="An error occured while loading", fg="red")
     load_error_label_server.grid(row=3, column=0, columnspan=2)
     load_error_label_server.grid_remove()
 
@@ -204,7 +204,7 @@ def create_kvm_tab(notebook, password):
 
     def start():
         if not combo_image.get() or not combo_key.get() or not combo_flavor.get() or not combo_sec.get() or not name.get():
-            messagebox.showerror("Errore", "Campi necessari non compilati")
+            messagebox.showerror("Error", "Required fields not filled in")
         else:
             flavor = combo_flavor.get()
             image_id = images_dict.get(combo_image.get())
@@ -213,7 +213,7 @@ def create_kvm_tab(notebook, password):
             network = combo_net.get()
             machine_name = name.get()
             
-            status_label.config(text="Creazione macchina virtuale in corso...")
+            status_label.config(text="Creating virtual machine...")
             error = utils.create_virtual_machine(flavor, image_id, key, sec_group, network, machine_name)
 
             #if error is not None:
@@ -224,9 +224,9 @@ def create_kvm_tab(notebook, password):
             if var_ip.get() == 1:
                 id_floating_ip, addr_floating_ip = utils.new_floating_ip(name.get())
                 utils.add_floating_ip(machine_name, id_floating_ip)
-                messagebox.showinfo("Macchina creata con successo", f"Accedi con:\nssh cc@{addr_floating_ip}")
+                messagebox.showinfo("Instance created", f"Access with:\nssh cc@{addr_floating_ip}")
 
-            status_label.config(text="Macchina creata con successo")
+            status_label.config(text="Instance created")
 
             # Reset campi
             combo_flavor.set('')
@@ -236,7 +236,7 @@ def create_kvm_tab(notebook, password):
             combo_net.set('')
             name.delete(0, tk.END)
             var_ip.set(0)
-            status_label.config(text="Pronto per una nuova creazione.")
+            status_label.config(text="Ready for new operation.")
 
             threading.Thread(target=lambda: aggiorna_server(
                 tab.winfo_toplevel(), progressbar_server, loading_label_server,
@@ -253,9 +253,9 @@ def create_kvm_tab(notebook, password):
                 print(server_dict)
                 if floating_delete == 1 and server_dict.get(server_name)[1] is not None:
                     utils.delete_floating_ip(server_dict.get(server_name)[1])
-                    messagebox.showinfo("Successo", "Server e floating IP eliminati con successo")
+                    messagebox.showinfo("Success", "Instance and floating IP deleted")
                 else:
-                    messagebox.showinfo("Successo", "Server eliminato con successo")
+                    messagebox.showinfo("Success", "Instance deleted")
 
                 combo_server.set('')
                 var_ip2.set(0)
@@ -264,9 +264,9 @@ def create_kvm_tab(notebook, password):
                     loaded_label_server, load_error_label_server, aggiorna_combobox_server
                 )).start()
             except Exception as e:
-                messagebox.showerror("Errore", f"Errore nell'eliminazione: {e}")
+                messagebox.showerror("Error", f"Error while eliminating: {e}")
         else:
-            messagebox.showerror("Errore", "Seleziona un server")
+            messagebox.showerror("Error", "Select an instance")
 
     def aggiorna_server_thread():
         threading.Thread(target=lambda: aggiorna_server(
@@ -275,13 +275,13 @@ def create_kvm_tab(notebook, password):
         )).start()
 
     #bottoni
-    b = tk.Button(top_frame, text="Lancia Macchina Virtuale", command=start)
+    b = tk.Button(top_frame, text="Launch virtual machine", command=start)
     b.grid(row=7, column=0, columnspan=2, pady=15)
 
-    btn_aggiorna_server = ttk.Button(bottom_frame, text="Ricarica", command=aggiorna_server_thread)
+    btn_aggiorna_server = ttk.Button(bottom_frame, text="Reload", command=aggiorna_server_thread)
     btn_aggiorna_server.grid(row=0, column=2)
 
-    b2 = tk.Button(bottom_frame, text="Elimina Macchina Virtuale", command=delete)
+    b2 = tk.Button(bottom_frame, text="Delete virtual machine", command=delete)
     b2.grid(row=2, column=0, columnspan=2, pady=15)
 
     #start
