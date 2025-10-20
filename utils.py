@@ -27,7 +27,7 @@ class OpenStackManager:
     def get_keypairs(self):
         with self.openstack_lock:
             keys = self.shell.exec("openstack keypair list --max-width 500")
-            pattern_keys = r"\|\s*(\w+)\s*\|\s*[0-9a-f:]{47}\s*\|\s*\w+\s*\|"
+            pattern_keys = r"\|\s*([^\|]+?)\s*\|\s*[0-9a-f:]*\s*\|\s*\w+\s*\|"
             matches = re.findall(pattern_keys, keys)
             return matches
 
