@@ -226,6 +226,8 @@ def create_chi_tab(notebook, password):
 
             if res_id == None or lease_id == None:
                 messagebox.showerror("Error", f"Insufficient resurces")
+                status_label.config(text="Insufficient resurces")
+                return
 
             
             time.sleep(5)
