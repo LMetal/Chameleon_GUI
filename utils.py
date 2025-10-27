@@ -126,10 +126,22 @@ class OpenStackManager:
             pattern_error = "ERROR: Not enough resources available with query"
             if pattern_error in result:
                 print("Errore: Risorse non sufficienti per la prenotazione.")
-                return None, None
+                return None, None, "Risorse non sufficienti"
 
             pattern_reservation_id = r'"id":\s*"([^"]+)"'
             pattern_lease_id = r'"lease_id":\s*"([^"]+)"'
+            patter_error = r'\bERROR\b'
+            patter_active = r'\bACTIVE\b'
+
+            while True:
+                result_status = self.shell.exec("openstack  reservation lease show "+machine_name+" -c status")
+                error = re.findall(patter_error, result_status)
+                success = re.findall(patter_active, result_status)
+                if error:
+                    return None, None, "An error occurred while activating the lease"
+                if success:
+                    break
+
 
             reservation_id = re.findall(pattern_reservation_id, result)
             lease_id = re.findall(pattern_lease_id, result)
@@ -137,7 +149,7 @@ class OpenStackManager:
             print(f"Reservation ID: {reservation_id}")
             print(f"Lease ID: {lease_id}")
 
-            return reservation_id, lease_id
+            return reservation_id, lease_id, "ok"
 
     def create_baremetal_machine(self, image_id, key, sec_group, network, res_id, lease_id, name):
         with self.openstack_lock:
@@ -155,7 +167,28 @@ class OpenStackManager:
 
             cmd_str = " ".join(command)
             result = self.shell.exec(cmd_str)
-            return result
+
+            patter_error = r'\bERROR\b'
+            patter_build = r'\BUILD\b'
+            patter_active = r'\ACTIVE\b'
+            i = 0
+            while True:
+                result_status = self.shell.exec("openstack server show "+name+" -c status")
+                error = re.findall(patter_error, result_status)
+                build = re.findall(patter_build, result_status)
+                active = re.findall(patter_active, result_status)
+                if error:
+                    return None, True
+                if build:
+                    i = i+1
+                if i == 10:
+                    break
+                
+                if active:
+                    break
+                
+
+            return result, False
 
 
     def get_flavors(self):

@@ -17,8 +17,8 @@ def main():
     root.deiconify()
     root.title("Chameleon Cloud GUI")
     
-    root.geometry("500x600")
-    root.minsize(500, 400)
+    root.geometry("420x600")
+    root.minsize(420, 400)
 
     notebook = ttk.Notebook(root)
     notebook.pack(fill='both', expand=True, padx=10, pady=10)

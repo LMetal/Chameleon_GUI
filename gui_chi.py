@@ -209,6 +209,8 @@ def create_chi_tab(notebook, password):
         combo_server['values'] = list(server_dict)
 
     def start():
+        status_label.config(text="Creating baremetal instance...")
+        status_label.update_idletasks()
         if not combo_image.get() or not combo_key.get() or not combo_node.get() or not combo_sec.get() or not name.get():
             messagebox.showerror("Error", "Required fields not filled in")
         else:
@@ -221,19 +223,23 @@ def create_chi_tab(notebook, password):
             end_time = combo_time.get()
             machine_name = name.get()
             
-            status_label.config(text="Creating the lease...")
-            res_id, lease_id = utils.new_reservation(node_type, machine_name, end_date, end_time)
+            #status_label.config(text="Creating the lease...")
+            res_id, lease_id, error = utils.new_reservation(node_type, machine_name, end_date, end_time)
 
             if res_id == None or lease_id == None:
-                messagebox.showerror("Error", f"Insufficient resurces")
-                status_label.config(text="Insufficient resurces")
+                messagebox.showerror("Error", error)
+                status_label.config(text=error)
                 return
 
             
             time.sleep(5)
             
-            status_label.config(text="Creating baremetal instance...")
-            error = utils.create_baremetal_machine(image_id, key, sec_group, network, res_id, lease_id, machine_name)
+            #status_label.config(text="Creating baremetal instance...")
+            error, ch_error = utils.create_baremetal_machine(image_id, key, sec_group, network, res_id, lease_id, machine_name)
+            if ch_error:
+                messagebox.showerror("Error", "Errore attivazione istanza")
+                status_label.config(text="Errore attivazione istanza")
+                return
 
             if var_ip.get() == 1:
                 id_floating_ip, addr_floating_ip = utils.new_floating_ip(name.get())
@@ -291,7 +297,7 @@ def create_chi_tab(notebook, password):
     b = tk.Button(top_frame, text="Launch baremetal instance", command=start)
     b.grid(row=8, column=0, columnspan=2, pady=15)
 
-    btn_aggiorna_server = ttk.Button(bottom_frame, text="Reload", command=aggiorna_server_thread)
+    btn_aggiorna_server = ttk.Button(bottom_frame, text="Refresh", command=aggiorna_server_thread)
     btn_aggiorna_server.grid(row=0, column=2)
 
     b2 = tk.Button(bottom_frame, text="Delete baremetal instance", command=delete)

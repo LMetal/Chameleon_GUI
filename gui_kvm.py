@@ -278,7 +278,7 @@ def create_kvm_tab(notebook, password):
     b = tk.Button(top_frame, text="Launch virtual machine", command=start)
     b.grid(row=7, column=0, columnspan=2, pady=15)
 
-    btn_aggiorna_server = ttk.Button(bottom_frame, text="Reload", command=aggiorna_server_thread)
+    btn_aggiorna_server = ttk.Button(bottom_frame, text="Refresh", command=aggiorna_server_thread)
     btn_aggiorna_server.grid(row=0, column=2)
 
     b2 = tk.Button(bottom_frame, text="Delete virtual machine", command=delete)

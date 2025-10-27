@@ -3,7 +3,7 @@ from typing import Optional
 import re
 
 class OpenStackShell:
-    def __init__(self, openrc_path: str, password: str):
+    def __init__(self, openrc_path, password):
         self.openrc_path = openrc_path
         self.password = password
         self.shell = None
@@ -43,7 +43,7 @@ class OpenStackShell:
         except Exception as e:
             raise Exception(f"Failed to initialize shell: {e}")
     
-    def exec(self, command: str, timeout: int = 30) -> str:
+    def exec(self, command, timeout = 30):
         if self.shell is None or not self.shell.isalive():
             raise Exception("Shell is not active")
         
